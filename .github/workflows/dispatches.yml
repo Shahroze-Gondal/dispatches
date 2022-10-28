@@ -1,16 +1,33 @@
-name: dispatches CI
+name: Dispatches CI
 
 on:
   pull_request:
 
 jobs:
   build-test:
+
     runs-on: ubuntu-latest
 
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v3
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v1
       with:
         python-version: 3.9
     - name: Install Dependencies
@@ -20,62 +37,14 @@ jobs:
     - name: Run Migrations
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      run: python manage.py migrate
+      run: python3 manage.py migrate
     - name: Run tox
       env:
-        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      run: tox
+        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
+      run: |
+        tox
     - name: Run Tests
       env:
-        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      run: pytest
-#name: Dispatches CI
-#
-#on:
-#  pull_request:
-#
-#jobs:
-#  build-test:
-#
-#    runs-on: ubuntu-latest
-#
-#    services:
-#      # Label used to access the service container
-#      postgres:
-#        # Docker Hub image
-#        image: postgres
-#        # Provide the password for postgres
-#        env:
-#          POSTGRES_PASSWORD: postgres
-#        # Set health checks to wait until postgres has started
-#        ports:
-#          - 5432:5432
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set up Python ${{ matrix.python-version }}
-#      uses: actions/setup-python@v1
-#      with:
-#        python-version: 3.9
-#    - name: Install Dependencies
-#      run: |
-#        python -m pip install --upgrade pip
-#        pip install -r requirements.txt
-##    - name: Run Migrations
-##      env:
-##        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-##      run: python3 manage.py migrate
-#    - name: Run tox
-#      env:
-#        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
-#      run: |
-#        tox
-#    - name: Run Tests
-#      env:
-#        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
-#      run: |
-#        pytest
+        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
+      run: |
+        pytest
