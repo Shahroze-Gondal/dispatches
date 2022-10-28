@@ -39,9 +39,9 @@ jobs:
 #      env:
 #        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 #      run: python3 manage.py migrate
-#    - name: Run tox
-#      env:
-#        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
+    - name: Run tox
+      env:
+        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
       run: |
         tox
     - name: Run Tests
