@@ -12,13 +12,15 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres
+        image: postgres:10.8
         # Provide the password for postgres
         env:
+          POSTGRES_NAME: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
         # Set health checks to wait until postgres has started
         ports:
-          - 5431:5431
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -46,11 +48,11 @@ jobs:
       run: python3 manage.py migrate
     - name: Run tox
       env:
-        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         tox
     - name: Run Tests
       env:
-        SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         pytest
