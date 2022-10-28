@@ -12,7 +12,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:10.8
+        image: postgres:latest
         # Provide the password for postgres
         env:
           POSTGRES_NAME: postgres
@@ -51,7 +51,7 @@ jobs:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         tox
-    - name: Run Tests
+    - name: Run Tests.
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
