@@ -52,8 +52,8 @@ jobs:
   example_job:
     name: Generate output
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     steps:
-    if: github.event_name != 'pull_request'          
-      - name: Run Tests
-        run: |
-          echo "job2"
+    - name: Run Tests
+      run: |
+        echo "job2"
