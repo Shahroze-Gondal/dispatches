@@ -51,7 +51,7 @@ jobs:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         tox
-    - name: Run Tests.
+    - name: Run Tests
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
