@@ -2,6 +2,7 @@ name: Dispatches CI
 
 on:
   pull_request:
+    jobs.build-test:
 
 jobs:
   build-test:
@@ -48,3 +49,11 @@ jobs:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         pytest
+
+  example_job:
+    name: Generate output
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Tests
+      run: |
+        echo "job2"
