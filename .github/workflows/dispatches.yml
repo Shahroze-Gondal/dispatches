@@ -39,10 +39,10 @@ jobs:
     - name: Run Migrations
       env:
         SECRET_KEY: 'django-insecure-(s^f9+7w02l=v7sby&xwvts9f7#08_j+g_vgja8+bw9uqdj6r='
-        DB_NAME: github_actions
-        DB_USER: postgres
-        DB_PASSWORD: postgres
-        DB_HOST: 12.0.0.1
+        DB_NAME: 'github_actions'
+        DB_USER: 'postgres'
+        DB_PASSWORD: 'postgres'
+        DB_HOST: '12.0.0.1'
         DB_PORT: 5433
         DB_ENGINE: 'django.db.backends.postgresql'
       run: echo 'hello'
