@@ -38,13 +38,13 @@ jobs:
         pip install -r requirements.txt
     - name: Run Migrations
       env:
-        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_PORT: ${{ secrets.DB_PORT }}
-        DB_ENGINE: ${{ secrets.DB_ENGINE }}
+        SECRET_KEY: 'django-insecure-(s^f9+7w02l=v7sby&xwvts9f7#08_j+g_vgja8+bw9uqdj6r='
+        DB_NAME: github_actions
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_HOST: 12.0.0.1
+        DB_PORT: 5433
+        DB_ENGINE: 'django.db.backends.postgresql'
       run: python3 manage.py migrate
     - name: Run tox
       env:
