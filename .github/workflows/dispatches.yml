@@ -2,7 +2,6 @@ name: Dispatches CI
 
 on:
   pull_request:
-    jobs.build-test:
 
 jobs:
   build-test:
@@ -54,6 +53,7 @@ jobs:
     name: Generate output
     runs-on: ubuntu-latest
     steps:
-    - name: Run Tests
-      run: |
-        echo "job2"
+    if: github.event_name != 'pull_request'          
+      - name: Run Tests
+        run: |
+          echo "job2"
