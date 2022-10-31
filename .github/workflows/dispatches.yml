@@ -39,12 +39,6 @@ jobs:
     - name: Run Migrations
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-#        DB_NAME: github_actions
-#        DB_USER: postgres
-#        DB_PASSWORD: postgres
-#        DB_HOST: 0.0.0.0
-#        DB_PORT: 5433
-#        DB_ENGINE: django.db.backends.postgresql
       run: |
         echo 'hello'
         python3 manage.py migrate
