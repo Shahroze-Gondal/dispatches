@@ -45,8 +45,9 @@ jobs:
         DB_HOST: '12.0.0.1'
         DB_PORT: 5433
         DB_ENGINE: 'django.db.backends.postgresql'
-      run: echo 'hello'
-#      run: python3 manage.py migrate
+      run: |
+        echo 'hello'
+        python3 manage.py migrate
     - name: Run tox
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
