@@ -47,7 +47,7 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
-        pytest & coverage report --fail-under=75
+        pytest && coverage report --fail-under=75
 #    - name: Report coverage to codecov
 #      env:
 #        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
