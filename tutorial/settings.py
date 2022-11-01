@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST'),
+        'NAME': "github_actions",
+        'USER': "postgres",
+        'PASSWORD': "postgres",
+        'HOST': "127.0.0.1",
         'PORT': 5432,
     }
 }
