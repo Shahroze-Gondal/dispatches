@@ -48,6 +48,11 @@ jobs:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         pytest
+    - name: Django Coverage action
+      uses: actions/python-django-coverage-gitHub-action@0.9
+      with:
+        django-app: 'trucking_app'
+        minimum-coverage: '86'
 
   example_job:
     name: Generate output
