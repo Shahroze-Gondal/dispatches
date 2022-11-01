@@ -47,12 +47,13 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
-        pytest
-    - name: Django Coverage action
-      uses: actions/python-django-coverage-gitHub-action@0.9
-      with:
-        django-app: 'trucking_app'
-        minimum-coverage: '86'
+        pytest & coverage report --fail-under=75
+#    - name: Report coverage to codecov
+#      env:
+#        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+#      uses: codecov/codecov-action@v1
+#      with:
+
 
   example_job:
     name: Generate output
